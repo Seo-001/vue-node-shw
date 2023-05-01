@@ -47,7 +47,7 @@
 
         4) cls 명령어 (clear) => 이전명령어 cmd창 지우기
 
-        5) exit 명령어 => cmd창닫기`
+        5) exit 명령어 => cmd창닫기
 
         (2) VSCODE에서 터미널 열기 : ctrl+`(백틱)
 
