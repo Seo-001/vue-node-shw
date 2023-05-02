@@ -1,4 +1,6 @@
 <!-- 모체이다.  -->
+
+<!-- 하위 컴포넌트의 관제탑이다.  -->
 <template>
   <div id="app">
     <img src="./assets/logo.png" />
