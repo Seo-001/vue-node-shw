@@ -61,7 +61,14 @@ const store = new Vuex.Store({
       헐.imgsrc = 헐.cityData[슉].이미지;
       // 2. 도시설명 변수 : desc
       헐.desc = 헐.cityData[슉].설명;
-    } //////// chgData 메서드 ///////
+    }, //////// chgData 메서드 ///////
+    // 메뉴데이터 변경메서드
+    chgMenu(헐, 슉) {
+      // 헐 state 변수, 슉- 전달값
+      헐.cityData =
+        슉 == 1 ? { ...헐.myD0, ...헐.myD1 } : { ...헐.myD0, ...헐.myD2 };
+      console.log("뮤테호출", 슉, 헐.cityData);
+    }
   },
   // (3) 백엔관련 코딩 비동기처리 메서드 구역 :
   // 호출시 dispatch()사용
