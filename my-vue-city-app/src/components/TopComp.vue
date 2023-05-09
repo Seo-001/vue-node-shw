@@ -20,12 +20,22 @@
     </ul>
     <!-- 메뉴선택이동링크 -->
     <div class="m2">
-      <a href="#" v-on:click="chgMenu(num)" v-text="'메뉴' + num"></a>
+      <!-- 
+        v-on: 이벤트명.prevent 기본기능막기 옵션 .prevent 는 eventpreventDefault() 와 같다. !
+        참고) 
+        v-on : 이벤트명.stop
+        이벤트버블링 막기 옵션 .stop는 
+        event.stopPropagation() 와 같다.! 
+
+       -->
+      <a href="#" v-on:click.prevent="chgMenu(num)" v-text="'메뉴' + num"></a>
     </div>
   </header>
 </template>
 
 <script>
+// 제이쿼리 임포트하기!!
+import $ from "jquery";
 export default {
   name: "TopArea",
   data() {
@@ -54,7 +64,50 @@ export default {
       // 메뉴1/ 메뉴2 전환을 위한 변수변경하기
       // 컴포넌트 변수인 num 을 변경한다.!!!
       n == 1 ? (this.num = 2) : (this.num = 1);
+
+      // 메뉴변경시 DOM 이 변경되므로
+      // 제이쿼리 메서드 호출하기!!
+      // 단, 제이쿼리 코드 블록으로 싸서
+      // 호출함으로 DOM 로드 후 실행보장!!
+      $(() => this.setJQ());
+    },
+    // 제이쿼리 셋팅 메서드 ////
+    setJQ() {
+      console.log("JQ셋팅!");
+      // 링크 클릭시 a에 클래스 on주기
+      $(".gnb a").click(function(e) {
+        e.preventDefault();
+        $(this)
+          .addClass("on")
+          .parent()
+          .siblings()
+          .find("a")
+          .removeClass("on");
+
+        // 박스 애니
+        showBx();
+      }); ////////// click ///////////
+
+      function showBx() {
+        // 이미지와 설명박스 순서대로 나타나기
+        $("main img")
+          .css({ opacity: 0 })
+          .stop()
+          .delay(500)
+          .fadeTo(500, 1);
+
+        $("main p")
+          .css({ opacity: 0 })
+          .stop()
+          .delay(1000)
+          .fadeTo(500, 1);
+      } ////// showBx ////
     }
+  },
+  // DOM 을 만들고 난후
+  mounted() {
+    // 제이쿼리 셋팅 메서드 호출!!
+    this.setJQ();
   }
 };
 </script>
